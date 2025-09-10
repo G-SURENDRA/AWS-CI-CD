@@ -63,7 +63,7 @@ jobs:
 
       - name: Run Docker Container
         run: |
-          docker run -d -p 8080:8080 --name=my-app ${{ secrets.DOCKERHUB_USERNAME }}/student_performance-app:latest
+          docker run -d -p 8080:8080 --name=student_performance-app ${{ secrets.DOCKERHUB_USERNAME }}/student_performance-app:latest
 
       - name: Clean up old Docker images
         run: docker system prune -f
