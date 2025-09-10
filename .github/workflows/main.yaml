@@ -37,14 +37,14 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.surendra799 }}
-          password: ${{ secrets.1234qwer }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and Push Docker image
         run: |
-          IMAGE_NAME=${{ secrets.surendra799 }}/student_performance-app:latest
-          docker build -t $student_performance-app .
-          docker push $student_performance-app
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+          docker build -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
 
   Continuous-Deployment:
     needs: build-and-push-dockerhub
@@ -55,7 +55,7 @@ jobs:
 
       - name: Pull latest image from Docker Hub
         run: |
-          docker pull ${{ secrets.surendra799 }}/my-app:latest
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
 
       - name: Stop and remove existing container if running
         run: |
@@ -63,7 +63,7 @@ jobs:
 
       - name: Run Docker Container
         run: |
-          docker run -d -p 8080:8080 --name=my-app ${{ secrets.surendra799 }}/my-app:latest
+          docker run -d -p 8080:8080 --name=my-app ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
 
       - name: Clean up old Docker images
         run: docker system prune -f
