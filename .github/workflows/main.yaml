@@ -59,7 +59,7 @@ jobs:
 
       - name: Stop and remove existing container if running
         run: |
-          docker ps -q --filter "name=my-app" | grep -q . && docker stop my-app && docker rm -fv my-app || true
+          docker ps -q --filter "name=student_performance-app" | grep -q . && docker stop my-app && docker rm -fv my-app || true
 
       - name: Run Docker Container
         run: |
