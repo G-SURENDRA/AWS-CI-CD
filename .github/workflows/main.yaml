@@ -42,7 +42,7 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/student_performance-app:latest
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
@@ -55,7 +55,7 @@ jobs:
 
       - name: Pull latest image from Docker Hub
         run: |
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/student_performance-app:latest
 
       - name: Stop and remove existing container if running
         run: |
@@ -63,7 +63,7 @@ jobs:
 
       - name: Run Docker Container
         run: |
-          docker run -d -p 8080:8080 --name=my-app ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+          docker run -d -p 8080:8080 --name=my-app ${{ secrets.DOCKERHUB_USERNAME }}/student_performance-app:latest
 
       - name: Clean up old Docker images
         run: docker system prune -f
